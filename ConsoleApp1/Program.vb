@@ -4,14 +4,13 @@ Imports System
 Module Program
 
     Sub Main()
-        Dim myText() = {"1", "4", "3", "2"}
-        SelectionSort(myText)
+        Dim myText() = {"3", "8", "5", "4"}
+        Dim sorted = SelectionSort(myText)
 
     End Sub
 
-    Sub SelectionSort(text() As String)
-
-        text = {"1", "4", "3", "2"}
+    Function SelectionSort(text() As String) As String()
+        text = {"3", "8", "5", "4"}
         Dim textLen = text.Length
         Dim out(0 To textLen - 1) As String
 
@@ -22,9 +21,7 @@ Module Program
             For j As Integer = i To 1 Step -1
                 Console.WriteLine($"out :{String.Join(",", out)}")
                 If (out(j) < out(j - 1)) Then
-                    Dim temp = out(j)
-                    out(j) = out(j - 1)
-                    out(j - 1) = temp
+                    Swap(out(j), out(j - 1))
                 End If
             Next
 
@@ -32,6 +29,14 @@ Module Program
 
         Console.WriteLine($"text:{String.Join(",", text)}")
         Console.WriteLine($"out :{String.Join(",", out)}")
+        Return out
+    End Function
 
+
+    Sub Swap(ByRef a As String, ByRef b As String)
+        Dim temp = a
+        a = b
+        b = temp
     End Sub
+
 End Module
