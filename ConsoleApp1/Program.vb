@@ -4,41 +4,37 @@ Imports System
 Module Program
 
     Sub Main()
-        Dim myText() = {"3", "8", "5", "4"}
-        Dim myNumbers() = {3, 8, 5, 4}
-        Dim sorted = SelectionSort(myNumbers)
 
+        Dim myNumbers() = {3, 8, 5, 4}
+        Dim sortedInsertion = InsertionSort(myNumbers)
+        Dim sortedSelection = SelectionSort(myNumbers)
+        Dim sortedBuble = BubbleSort(myNumbers)
     End Sub
 
-    Function InsertionSort(text As String()) As String()
-        'text = {"3", "8", "5", "4"}
-        Dim textLen = text.Length
-        'Dim out(0 To textLen - 1) As String
+    Function InsertionSort(userNumbers As Integer()) As Integer()
+        userNumbers = {4, 8, 5, 3}
+        Dim userLength = userNumbers.Length
 
-        For i As Integer = 0 To textLen - 1 Step 1
-
-            'out(i) = text(i)
+        For i As Integer = 0 To userLength - 1 Step 1
 
             For j As Integer = i To 1 Step -1
-                Console.WriteLine($"out :{String.Join(",", text)}")
-                If (text(j) < text(j - 1)) Then
-                    Swap(text(j), text(j - 1))
+                Dim userText = $"{String.Join(",", userNumbers)}"
+                If (userNumbers(j) < userNumbers(j - 1)) Then
+                    Swap(userNumbers(j), userNumbers(j - 1))
                 End If
             Next
 
         Next
-
-        Console.WriteLine($"text:{String.Join(",", text)}")
-        'Console.WriteLine($"out :{String.Join(",", out)}")
-        Return text
+        Return userNumbers
     End Function
 
 
-    Sub Swap(ByRef a As String, ByRef b As String)
+    Sub Swap(ByRef a As Integer, ByRef b As Integer)
         Dim temp = a
         a = b
         b = temp
     End Sub
+
 
 
     Function SelectionSort(userNumbers As Integer()) As Integer()
@@ -58,6 +54,29 @@ Module Program
         Next
         Return userNumbers
     End Function
+
+
+    Function BubbleSort(userNumbers As Integer()) As Integer()
+        userNumbers = {4, 8, 5, 3}
+
+        Dim userLength As Integer = userNumbers.Length
+        Dim isSwap = True
+
+        While (isSwap)
+            isSwap = False
+
+            For i As Integer = 0 To userLength - 2
+                Dim userText = $"{String.Join(",", userNumbers)}"
+                If userNumbers(i + 1) < userNumbers(i) Then
+                    Swap(userNumbers(i + 1), userNumbers(i))
+                    isSwap = True
+                End If
+
+            Next
+        End While
+        Return userNumbers
+    End Function
+
 
 
 End Module
