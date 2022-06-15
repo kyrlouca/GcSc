@@ -7,25 +7,29 @@ Module Program
 
         Dim myNumbers() = {3, 8, 5, 4}
         Dim sortedInsertion = InsertionSort(myNumbers)
-        Dim sortedSelection = SelectionSort(myNumbers)
+        Dim sortedSelection = SelectionSort({4, 8, 2, 5, 6})
         Dim sortedBuble = BubbleSort(myNumbers)
         Dim qsNum() = {2, 6, 8, 12, 4, 6}
         Dim xx = QuickSort(qsNum, 0, 5)
     End Sub
 
+
+    'insert each element in its correct position in the sorted array (or use the left of the original array as the sorted array)
+    ' userNumbers = {3, 8, 5, 4}
     Function InsertionSort(userNumbers As Integer()) As Integer()
-        userNumbers = {4, 8, 5, 3}
         Dim userLength = userNumbers.Length
 
-        For i As Integer = 0 To userLength - 1 Step 1
+        For i As Integer = 1 To userLength - 1 'iterate for each element and "insert it" in the sorted array. Start from second item
 
-            For j As Integer = i To 1 Step -1
-                Dim userText = $"{String.Join(",", userNumbers)}"
-                If (userNumbers(j) < userNumbers(j - 1)) Then
-                    Swap(userNumbers(j), userNumbers(j - 1))
-                End If
-            Next
+            Dim ItemToInsert = userNumbers(i)
+            Dim currentItem = i - 1
 
+            While userNumbers(currentItem) > ItemToInsert And currentItem > 0 'if the currentItem is greated than insertedItem, then shift currentItem to the right
+                userNumbers(currentItem + 1) = userNumbers(currentItem)  'if the ItemToInsert is greater than current item, SHIFT the the compared to the next position
+                currentItem = currentItem - 1
+            End While
+
+            userNumbers(currentItem + 1) = ItemToInsert
         Next
         Return userNumbers
     End Function
@@ -38,44 +42,41 @@ Module Program
     End Sub
 
 
-
+    'in each iteration place the next smallest number at the i position
+    'userNumbers = {4, 8, 5, 2, 6}
     Function SelectionSort(userNumbers As Integer()) As Integer()
-        userNumbers = {4, 8, 5, 3}
+        For i As Integer = 0 To userNumbers.Length - 1
+            Dim smallest = i
 
-        Dim userLength As Integer = userNumbers.Length
-
-        For i As Integer = 0 To userLength - 1
-
-            For j As Integer = i + 1 To userLength - 1
-                Dim userText = $"{String.Join(",", userNumbers)}"
-                If userNumbers(j) < userNumbers(i) Then
-                    Swap(userNumbers(j), userNumbers(i))
+            For j As Integer = i To userNumbers.Length - 1
+                If userNumbers(j) < userNumbers(smallest) Then
+                    smallest = j
                 End If
             Next
 
+            Swap(userNumbers(i), userNumbers(smallest))
         Next
         Return userNumbers
     End Function
 
-
+    'in each iteration the largest item bubbles to the right
+    'iterate as many times as needed
     Function BubbleSort(userNumbers As Integer()) As Integer()
-        userNumbers = {4, 8, 5, 3}
+        ' userNumbers = {4, 8, 5, 3}
 
         Dim userLength As Integer = userNumbers.Length
-        Dim isSwap = True
+        Dim isSwap As Boolean
 
-        While (isSwap)
+        Do   'keep bubbling until no swapping
             isSwap = False
-
             For i As Integer = 0 To userLength - 2
-                Dim userText = $"{String.Join(",", userNumbers)}"
-                If userNumbers(i + 1) < userNumbers(i) Then
-                    Swap(userNumbers(i + 1), userNumbers(i))
+                If userNumbers(i) > userNumbers(i + 1) Then
+                    Swap(userNumbers(i), userNumbers(i + 1))
                     isSwap = True
                 End If
-
             Next
-        End While
+
+        Loop Until Not isSwap
         Return userNumbers
     End Function
 
@@ -114,6 +115,7 @@ Module Program
         Swap(userNumbers(high), userNumbers(endPos))
         Return high
     End Function
+
 
 
 
