@@ -14,7 +14,9 @@ Module Program
     End Sub
 
 
-    'insert each element in its correct position in the sorted array (or use the left of the original array as the sorted array)
+    'insert each element in its correct position in the sorted array ( use the left of the original array as the sorted array)
+    'Start from the second leftomost item (since the first item is sorted)
+    'before inserting the next unsorted item, iterate the sorted part of array from the right and shift larger elements the right
     ' userNumbers = {3, 8, 5, 4}
     Function InsertionSort(userNumbers As Integer()) As Integer()
         Dim userLength = userNumbers.Length
@@ -35,14 +37,8 @@ Module Program
     End Function
 
 
-    Sub Swap(ByRef a As Integer, ByRef b As Integer)
-        Dim temp = a
-        a = b
-        b = temp
-    End Sub
-
-
-    'in each iteration place the next smallest number at the i position
+    'iterate for each member of the array
+    'in each iteration, SWAP the current item (i) with the  smallest of the remaining items (smallest)
     'userNumbers = {4, 8, 5, 2, 6}
     Function SelectionSort(userNumbers As Integer()) As Integer()
         For i As Integer = 0 To userNumbers.Length - 1
@@ -59,7 +55,8 @@ Module Program
         Return userNumbers
     End Function
 
-    'in each iteration the largest item bubbles to the right
+
+    'in each iteration, the largest item bubbles to the right
     'iterate as many times as needed
     Function BubbleSort(userNumbers As Integer()) As Integer()
         ' userNumbers = {4, 8, 5, 3}
@@ -117,6 +114,10 @@ Module Program
     End Function
 
 
-
+    Sub Swap(ByRef a As Integer, ByRef b As Integer)
+        Dim temp = a
+        a = b
+        b = temp
+    End Sub
 
 End Module
