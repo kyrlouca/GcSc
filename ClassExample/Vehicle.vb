@@ -1,7 +1,7 @@
 ﻿'An abstract class which can NOT be instantiated
 'It defines the necessary attributes and methods
 'Derived classes must implement/override the methods 
-'Derived classes may overload a method
+'Derived classes may OVERLOAD a method if it has a different arguments signature
 
 'MustInherit makes the class abstract
 Public MustInherit Class Vehicle
@@ -19,11 +19,10 @@ Public MustInherit Class Vehicle
     End Sub
 
     Public MustOverride Function CalculateTotalValue() As Integer
-    Public MustOverride Function ShowDetails() As String
 
 End Class
 
-'Derived class implments a constructor 
+'Derived class impelments a constructor 
 'Overrides a method 
 Public Class Car
     Inherits Vehicle
@@ -33,8 +32,8 @@ Public Class Car
         Return _basicValue + _metallicPaintCost
     End Function
 
-    Public Overrides Function ShowDetails() As String
-        Return $"brand {brand} cost:{CalculateTotalValue()}"
+    Public Overridable Function ShowDetails() As String
+        Return $"car brand {brand}"
     End Function
 
     Public Sub New(brand As String, basicCost As Integer, metallicPaintCost As Integer)
@@ -58,14 +57,13 @@ Public Class Truck
         Return _basicValue + _maxLoadKg * 100
     End Function
 
-    Public Overrides Function ShowDetails() As String
-        Return $"brand {brand} cost:{CalculateTotalValue()}"
-    End Function
+
 End Class
 
 
 'Derive the class from Another Class
-'Overload the method CalculateCarValue because it should include "leatherCost"
+'Override the method CalculateTotalValue because it should include "leatherCost"
+'Overload the method ShowDetails because it has different ARGUMENTS
 Public Class LuxuryCar
     Inherits Car
     Private _leatherCost As Integer
@@ -75,15 +73,15 @@ Public Class LuxuryCar
         _leatherCost = leatherCost
     End Sub
 
-    Function CalculateCarValue() As Integer
+    Overrides Function CalculateTotalValue() As Integer
         Return _basicValue + _metallicPaintCost + _leatherCost
     End Function
     Public Overrides Function ShowDetails() As String
-        Return $"brand {brand} cost:{CalculateTotalValue()}"
+        Return $"luxury brand {brand}"
     End Function
 
     Public Overloads Function ShowDetails(title As String) As String
-        Return $"{title} {brand} cost:{CalculateTotalValue()}"
+        Return $"{title} {brand}"
     End Function
 
 End Class

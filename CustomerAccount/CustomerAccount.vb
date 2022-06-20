@@ -34,7 +34,7 @@
     End Property
 
 
-    'specilized functions
+    'specialized functions for changing the balance
     Public Function CreditAccount(Amount As Double) As Boolean
         If (Amount <= 0) Then
             Return False
