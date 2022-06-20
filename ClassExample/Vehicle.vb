@@ -56,8 +56,6 @@ Public Class Truck
     Public Overrides Function CalculateTotalValue() As Integer
         Return _basicValue + _maxLoadKg * 100
     End Function
-
-
 End Class
 
 
