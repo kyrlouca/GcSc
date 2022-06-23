@@ -4,6 +4,7 @@ Module Program
     Sub Main(args As String())
         Console.WriteLine("Hello Classes")
 
+
         Dim car1 = New Car("Mazda", 10000, 200)
         Dim carCost = car1.CalculateTotalValue()
         Console.WriteLine($"{car1.ShowDetails} cost:{carCost}")
